@@ -1,0 +1,29 @@
+[[permission]]
+identifier = "allow-workspace"
+description = "Open a local folder and read or write its Markdown files."
+commands.allow = [
+  "pick_folder",
+  "list_workspace",
+  "read_text",
+  "resolve_markdown_link",
+  "write_text",
+  "list_encryption_keys",
+  "add_encryption_key",
+  "remove_encryption_key",
+  "create_markdown",
+  "set_window_theme",
+  "save_file",
+  "write_base64",
+  "rename_path",
+  "remove_path",
+  "create_folder",
+  "search_workspace",
+  "export_pdf",
+  "export_docx",
+  "export_epub",
+  "file_stamp",
+  "finish_close",
+  "launch_args",
+  "reveal_in_folder",
+  "open_external_url",
+]

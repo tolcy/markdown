@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tolcy Markdown</title>
+    <link rel="icon" type="image/svg+xml" href="/tolcy.svg" />
+    <script>
+      try {
+        var savedTheme = localStorage.getItem("wengao-theme");
+        if (savedTheme === "light" || savedTheme === "paper" || savedTheme === "dark") {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch (error) {}
+    </script>
+    <link rel="stylesheet" href="/vendor/vditor/dist/index.css" />
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside id="sidebar">
+        <div class="side-brand">
+          <img class="brand-symbol" src="/tolcy.svg" width="34" height="34" alt="" />
+          <span class="brand-name">Tolcy<span class="brand-caption">MARKDOWN EDITOR</span></span>
+        </div>
+        <div class="side-head">
+          <button type="button" id="toggle-workspace" class="workspace-section-toggle" aria-expanded="true" aria-controls="workspace-box folder-name outline-splitter" title="收起工作区">
+            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-i18n="workspace">工作区</span>
+          </button>
+          <div class="side-tools">
+            <button type="button" id="collapse-tree" data-i18n-title="collapse" title="折叠" aria-label="折叠">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.5h12M2 8h12M2 11.5h8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </button>
+            <button type="button" id="open-folder" data-i18n-title="openFolder" title="打开文件夹" aria-label="打开文件夹">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h4l1.3 1.5H14l-1.5 7H2zM2 7h12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="folder-name" class="folder-name" data-i18n="noFolder">未打开文件夹</div>
+        <div class="side-box" id="workspace-box">
+          <div class="search-row">
+            <svg class="search-icon" width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.8" cy="6.8" r="4.3" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="m10 10 3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <input id="search" class="search" type="text" data-i18n-placeholder="search" placeholder="搜索" />
+            <button type="button" id="search-clear" class="search-clear" data-i18n-title="clearSearch" hidden aria-label="清除搜索">×</button>
+          </div>
+          <div id="search-results" class="search-results" hidden></div>
+          <nav id="tree"></nav>
+        </div>
+        <div id="outline-splitter" class="splitter splitter-row" data-i18n-title="dragOutline" title="上下拖动大纲">
+          <span class="grip"></span>
+        </div>
+        <div id="outline-panel" class="side-box">
+          <div class="side-head">
+            <button type="button" id="toggle-outline" class="workspace-section-toggle" aria-expanded="true" aria-controls="outline" title="收起大纲">
+              <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span data-i18n="outline">大纲</span>
+            </button>
+          </div>
+          <nav id="outline"></nav>
+        </div>
+        <div class="side-footer">
+          <div class="footer-encryption" id="footer-encryption">
+            <button type="button" id="quick-encryption-toggle" class="quick-encryption-toggle" role="switch" aria-checked="false" data-i18n-title="encryptionToggle" aria-label="文稿加密" disabled>
+              <span class="encryption-switch-track" aria-hidden="true"></span>
+              <span data-i18n="encryptionToggleLabel">加密</span>
+            </button>
+            <select id="quick-encryption-key" class="quick-encryption-key" data-i18n-title="encryptionKeyName" aria-label="加密密钥" disabled></select>
+          </div>
+          <button type="button" id="open-settings" class="icon-button" aria-pressed="false" data-i18n-title="settings" aria-label="设置" title="设置"><svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true"><path d="m8 2-.6 2-1.7 1-2-.5-2 3.4L3.2 9v2L1.7 12l2 3.5 2-.5 1.7 1 .6 2h4l.6-2 1.7-1 2 .5 2-3.5-1.5-1V9l1.5-1.1-2-3.4-2 .5-1.7-1-.6-2Z" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/><circle cx="10" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></button>
+        </div>
+      </aside>
+      <div id="splitter" class="splitter splitter-col" data-i18n-title="dragSidebar" title="左右拖动">
+        <span class="grip"></span>
+      </div>
+      <section class="document">
+        <header class="doc-bar" id="editor-bar">
+          <button type="button" class="sidebar-toggle" id="toggle-sidebar" data-i18n-title="closeWorkspace" title="关闭工作区" aria-pressed="true">
+            <svg class="side-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 2.5v11" stroke="currentColor" stroke-width="1.2"/><rect class="side-icon-fill" x="2.1" y="3.1" width="2.9" height="9.8" rx="0.3"/></svg>
+          </button>
+          <div class="tab-strip" id="tab-strip">
+            <button type="button" id="tab-new" class="tab-new" data-i18n-title="newFile" title="新建">+</button>
+            <div id="tabs" class="tabs" role="tablist"></div>
+            <button type="button" id="tabs-more" class="tabs-more" hidden aria-haspopup="listbox" aria-expanded="false" data-i18n-title="moreTabs" title="更多标签">
+              <svg width="14" height="14" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.2 4L6 7.8 9.8 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div id="tabs-menu" class="tabs-menu" hidden role="listbox"></div>
+          </div>
+          <span id="file-name" class="file-name" hidden>未命名.md</span>
+          <span id="save-dot" class="save-dot is-saved" hidden></span>
+          <div class="doc-actions">
+            <button type="button" data-action="save-file" data-i18n-title="save" aria-label="保存" title="保存"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5h8l2 2v9H3zM5 2.5v4h5v-4M5.5 13.5V9h5v4.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+            <button type="button" data-action="export" data-i18n-title="export" aria-label="导出" title="导出"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 10V2m-3 3 3-3 3 3M3 8v5.5h10V8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </header>
+        <div id="find-bar" class="find-bar" hidden>
+          <input id="find-input" type="text" data-i18n-placeholder="find" placeholder="查找" />
+          <label class="find-opt" data-i18n-title="regex" title="正则"><input id="find-regex" type="checkbox" /> .* </label>
+          <span id="find-count"></span>
+          <button type="button" id="find-prev">↑</button>
+          <button type="button" id="find-next">↓</button>
+          <input id="replace-input" type="text" data-i18n-placeholder="replace" placeholder="替换" />
+          <button type="button" id="replace-one" data-i18n="replaceOne">替换</button>
+          <button type="button" id="replace-all" data-i18n="replaceAll">全部替换</button>
+          <button type="button" id="replace-workspace" data-i18n="replaceWorkspace" hidden>工作区</button>
+          <button type="button" id="find-close" data-i18n-title="close" title="关闭">×</button>
+        </div>
+        <main id="editor"></main>
+        <section id="settings-page" class="settings-page" hidden>
+          <header class="doc-bar settings-bar">
+            <button type="button" class="sidebar-toggle" data-i18n-title="closeWorkspace" title="关闭工作区" aria-pressed="true">
+              <svg class="side-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 2.5v11" stroke="currentColor" stroke-width="1.2"/><rect class="side-icon-fill" x="2.1" y="3.1" width="2.9" height="9.8" rx="0.3"/></svg>
+            </button>
+            <button type="button" id="close-settings" class="btn-frame" data-i18n="back">返回</button>
+            <span class="file-name" data-i18n="settings">设置</span>
+          </header>
+          <div class="settings-layout">
+            <nav class="settings-nav">
+              <button type="button" data-settings-tab="appearance" class="is-current" data-i18n="appearance">外观</button>
+              <button type="button" data-settings-tab="file" data-i18n="file">文件</button>
+              <button type="button" data-settings-tab="encryption" data-i18n="encryption">加密与密钥</button>
+              <button type="button" data-settings-tab="export" data-i18n="export">导出</button>
+              <button type="button" data-settings-tab="shortcuts" data-i18n="shortcuts">快捷键</button>
+              <button type="button" data-settings-tab="language" data-i18n="language">语言</button>
+            </nav>
+            <div class="settings-main">
+              <section class="settings-panel" data-settings-panel="appearance">
+                <h2 data-i18n="appearance">外观</h2>
+                <p data-i18n="appearanceHint">标题栏、侧栏和正文一起切换。</p>
+                <label class="check-row"><input id="focus-mode" type="checkbox" /> <span data-i18n="focusMode">专注模式</span></label>
+                <label class="check-row"><input id="typewriter-mode" type="checkbox" /> <span data-i18n="typewriter">打字机模式</span></label>
+                <label class="check-row"><input id="spellcheck" type="checkbox" /> <span data-i18n="spellcheck">拼写检查</span></label>
+                <p data-i18n="spellHint">使用系统词典；中文提示取决于系统语言包，英文通常更完整。</p>
+                <p data-i18n="focusHint">只突出当前段落，打字机模式把当前行保持在中间。</p>
+                <div class="theme-grid">
+                <button type="button" class="theme-option" data-theme-choice="light" aria-pressed="false">
+                  <span class="theme-preview preview-light" aria-hidden="true"><i></i><b>Aa</b><em></em></span>
+                  <span data-i18n="themeLight">浅色</span>
+                  <small data-i18n="themeLightHint">纯白纸面</small>
+                </button>
+                <button type="button" class="theme-option" data-theme-choice="paper" aria-pressed="false">
+                  <span class="theme-preview preview-paper" aria-hidden="true"><i></i><b>Aa</b><em></em></span>
+                  <span data-i18n="themePaper">纸色</span>
+                  <small data-i18n="themePaperHint">温暖柔和</small>
+                </button>
+                <button type="button" class="theme-option" data-theme-choice="dark" aria-pressed="false">
+                  <span class="theme-preview preview-dark" aria-hidden="true"><i></i><b>Aa</b><em></em></span>
+                  <span data-i18n="themeDark">暗色</span>
+                  <small data-i18n="themeDarkHint">深色背景</small>
+                </button>
+                </div>
+              </section>
+              <section class="settings-panel" data-settings-panel="file" hidden>
+                <h2 data-i18n="file">文件</h2>
+                <p data-i18n="fileHint">新建、打开和保存当前文稿。</p>
+                <div class="settings-actions">
+                  <button type="button" id="new-file" data-i18n="newFile">新建</button>
+                  <button type="button" id="open-file" data-i18n="open">打开</button>
+                  <button type="button" id="save-file" data-i18n="save">保存</button>
+                  <button type="button" id="save-as" data-i18n="saveAs">另存为</button>
+                </div>
+              </section>
+              <section class="settings-panel" data-settings-panel="encryption" hidden>
+                <h2 data-i18n="encryption">加密与密钥</h2>
+                <p data-i18n="encryptionHint">为不同文稿选择不同密钥。软件会在这台电脑的当前 Windows 账户中安全记住密钥，下次打开时自动解密。</p>
+                <p class="encryption-note" data-i18n="encryptionBackupHint">请另行保存原始密钥。换电脑或重装系统后，需要重新添加相同密钥。加密只保护文稿正文，不隐藏文件名，也不加密图片附件或导出文件。</p>
+                <p id="encryption-desktop-hint" data-i18n="encryptionDesktopOnly" hidden>请使用 Windows 桌面版管理密钥和加密文稿。</p>
+                <div class="encryption-document">
+                  <h3 data-i18n="encryptionCurrent">当前文稿</h3>
+                  <p id="encryption-document-name"></p>
+                  <label for="document-encryption-key" data-i18n="encryptionUseKey">保存时使用</label>
+                  <select id="document-encryption-key"><option value="" data-i18n="encryptionNone">不加密（普通 Markdown）</option></select>
+                  <p id="encryption-document-status" aria-live="polite"></p>
+                  <button type="button" id="apply-document-encryption" data-i18n="encryptionApply">应用并保存</button>
+                </div>
+                <h3 data-i18n="encryptionKeys">已记住的密钥</h3>
+                <div id="encryption-key-list" aria-live="polite"></div>
+                <form id="encryption-key-form" class="encryption-form" autocomplete="off">
+                  <h3 data-i18n="encryptionAdd">添加密钥</h3>
+                  <label for="encryption-key-name" data-i18n="encryptionKeyName">密钥名称</label>
+                  <input id="encryption-key-name" type="text" maxlength="64" required autocomplete="off" />
+                  <label for="encryption-key-secret" data-i18n="encryptionSecret">密钥（至少 12 个字符）</label>
+                  <input id="encryption-key-secret" type="password" minlength="12" maxlength="1024" required autocomplete="new-password" spellcheck="false" />
+                  <label for="encryption-key-confirm" data-i18n="encryptionConfirm">再次输入密钥</label>
+                  <input id="encryption-key-confirm" type="password" minlength="12" maxlength="1024" required autocomplete="new-password" spellcheck="false" />
+                  <button type="submit" id="add-encryption-key" data-i18n="encryptionRemember">安全记住密钥</button>
+                </form>
+              </section>
+              <section class="settings-panel" data-settings-panel="export" hidden>
+                <h2 data-i18n="export">导出</h2>
+                <p data-i18n="exportHint">把当前文稿存成文件，或复制成公众号可用的内容。</p>
+                <div class="settings-actions">
+                  <button type="button" data-export="pdf">PDF</button>
+                  <button type="button" data-export="word">Word</button>
+                  <button type="button" data-export="html">HTML</button>
+                  <button type="button" data-export="epub">EPUB</button>
+                  <button type="button" data-export="latex">LaTeX</button>
+                  <button type="button" data-export="wechat" data-i18n="wechat">公众号</button>
+                  <button type="button" data-export="copy-plain" data-i18n="copyPlain">复制纯文本</button>
+                  <button type="button" data-export="copy-html" data-i18n="copyHtml">复制 HTML</button>
+                  <button type="button" id="fetch-images" data-i18n="fetchImages">下载远程图片</button>
+                </div>
+              </section>
+              <section class="settings-panel" data-settings-panel="shortcuts" hidden>
+                <h2 data-i18n="shortcuts">快捷键</h2>
+                <p data-i18n="shortcutsHint">常用操作一览。</p>
+                <ul class="shortcut-list">
+                  <li><kbd>Ctrl</kbd>+<kbd>B</kbd> <span data-i18n="bold">加粗</span></li>
+                  <li><kbd>Ctrl</kbd>+<kbd>I</kbd> <span data-i18n="italic">斜体</span></li>
+                  <li><kbd>Ctrl</kbd>+<kbd>D</kbd> <span data-i18n="strike">删除线</span></li>
+                  <li><kbd>Ctrl</kbd>+<kbd>1</kbd>…<kbd>6</kbd> <span data-i18n="headingLevel">一至六级标题</span></li>
+                  <li><kbd>Ctrl</kbd>+<kbd>S</kbd> <span data-i18n="save">保存</span></li>
+                  <li><kbd>Ctrl</kbd>+<kbd>F</kbd> <span data-i18n="find">查找</span></li>
+                  <li><kbd>Ctrl</kbd>+<kbd>Click</kbd> <span data-i18n="openLink">打开链接</span></li>
+                  <li><kbd>Ctrl</kbd>+<kbd>H</kbd> <span data-i18n="gotoHeading">跳到标题</span></li>
+                  <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd> <span data-i18n="replace">替换</span></li>
+                  <li><kbd>Ctrl</kbd>+<kbd>P</kbd> <span data-i18n="quickOpen">按文件名打开</span></li>
+                  <li><kbd>Ctrl</kbd>+<kbd>U</kbd> <span data-i18n="fenceLang">代码块语言</span></li>
+                  <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd> <span data-i18n="stats">字数统计</span></li>
+                  <li><kbd>Esc</kbd> <span data-i18n="closePalette">关闭查找 / 快速打开</span></li>
+                  <li><kbd>Enter</kbd> <span data-i18n="findNextHint">查找下一个</span></li>
+                  <li><kbd>Shift</kbd>+<kbd>Enter</kbd> <span data-i18n="findPrevHint">查找上一个</span></li>
+                  <li><kbd>(</kbd> <kbd>【</kbd> <kbd>*</kbd> <kbd>`</kbd> <span data-i18n="pairHint">自动成对，光标落在中间</span></li>
+                </ul>
+              </section>
+              <section class="settings-panel" data-settings-panel="language" hidden>
+                <h2 data-i18n="language">语言</h2>
+                <p data-i18n="languageHint">切换界面语言。正在编辑的正文不会翻译。</p>
+                <div class="lang-select" id="lang-select">
+                  <button type="button" id="lang-select-button" class="lang-select-button" aria-expanded="false" aria-haspopup="listbox">
+                    <span id="lang-select-label">简体中文</span>
+                  </button>
+                  <div id="lang-select-panel" class="lang-select-panel" hidden>
+                    <input id="lang-select-search" type="text" data-i18n-placeholder="search" placeholder="搜索" />
+                    <ul id="lang-select-list" role="listbox"></ul>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+      </section>
+    </div>
+    <footer class="status">
+      <span id="dirty" data-i18n="saved">已保存</span>
+      <span class="status-format">Markdown</span>
+      <button type="button" id="count" data-i18n-title="stats" title="字数统计">0</button>
+    </footer>
+    <div id="dialog" class="dialog" hidden>
+      <div class="dialog-card" role="dialog" aria-modal="true">
+        <h2 id="dialog-title" data-i18n="confirm">确认</h2>
+        <p id="dialog-message"></p>
+        <input id="dialog-input" type="text" hidden />
+        <div class="dialog-actions">
+          <button type="button" id="dialog-extra" hidden></button>
+          <button type="button" id="dialog-cancel" data-i18n="cancel">取消</button>
+          <button type="button" id="dialog-ok" class="primary" data-i18n="ok">确定</button>
+        </div>
+      </div>
+    </div>
+    <div id="tree-menu" class="menu tree-menu" hidden>
+      <button type="button" data-tree-act="new-file">
+        <svg class="menu-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5h6l3 3V13.5h-9z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M9.5 2.5v3h3" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8 7v4M6 9h4" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <span data-i18n="newDoc">新建文件</span>
+      </button>
+      <button type="button" data-tree-act="new-dir">
+        <svg class="menu-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5h4l1.2 1.2H13.5v6.8H2.5z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8 8v3M6.5 9.5h3" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <span data-i18n="newFolder">新建文件夹</span>
+      </button>
+      <button type="button" data-tree-act="rename">
+        <svg class="menu-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 12.5l.8-3.2L10.8 2.3a1.2 1.2 0 0 1 1.7 0l1.2 1.2a1.2 1.2 0 0 1 0 1.7L6.5 12.4 3.3 13.2z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        <span data-i18n="rename">重命名</span>
+      </button>
+      <button type="button" data-tree-act="reveal">
+        <svg class="menu-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5h4l1.2 1.2H13.5v6.8H2.5z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="9.2" cy="9.2" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M10.7 10.7l1.6 1.6" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <span data-i18n="showInFolder">在文件夹中显示</span>
+      </button>
+      <div class="menu-sep" role="separator"></div>
+      <button type="button" data-tree-act="delete" class="menu-danger" data-i18n-title="removeHint" title="只从工作区去掉，不删磁盘文件">
+        <svg class="menu-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 5h9M6 5V3.8h4V5M5.2 5l.5 7.2h4.6L10.8 5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        <span data-i18n="remove">移除</span>
+      </button>
+    </div>
+    <div id="quick-open" class="palette" hidden>
+      <input id="quick-input" type="text" data-i18n-placeholder="quickOpen" placeholder="按文件名打开" spellcheck="false" autocomplete="off" />
+      <ul id="quick-list"></ul>
+    </div>
+    <div id="heading-open" class="palette" hidden>
+      <input id="heading-input" type="text" data-i18n-placeholder="gotoHeading" placeholder="跳到标题" spellcheck="false" autocomplete="off" />
+      <ul id="heading-list"></ul>
+    </div>
+    <div id="stats-panel" class="stats-panel" hidden></div>
+    <div id="lang-palette" class="palette" hidden>
+      <input id="lang-input" type="text" data-i18n-placeholder="langPrompt" placeholder="输入语言，例如 java" spellcheck="false" autocomplete="off" />
+      <ul id="lang-list"></ul>
+    </div>
+    <input id="fallback-open" type="file" accept=".md,.markdown,.txt,text/markdown,text/plain" hidden />
+    <input id="fallback-folder" type="file" webkitdirectory directory multiple hidden />
+    <script src="/vendor/vditor/dist/index.min.js"></script>
+    <script src="/app.js"></script>
+    <script src="/encryption.js"></script>
+  </body>
+</html>

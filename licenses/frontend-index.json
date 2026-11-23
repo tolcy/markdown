@@ -1,0 +1,232 @@
+[
+  {
+    "name": "abcjs",
+    "referenceVersion": "5.10.3",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/abcjs/-/abcjs-5.10.3.tgz",
+    "files": [
+      "package/static-wrappers/license.js",
+      "package/LICENSE.md"
+    ]
+  },
+  {
+    "name": "cytoscape",
+    "referenceVersion": "3.31.0",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/cytoscape/-/cytoscape-3.31.0.tgz",
+    "files": [
+      "package/LICENSE",
+      "package/license-update.js"
+    ]
+  },
+  {
+    "name": "d3",
+    "referenceVersion": "6.7.0",
+    "license": "BSD-3-Clause",
+    "source": "https://registry.npmjs.org/d3/-/d3-6.7.0.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "d3-flextree",
+    "referenceVersion": "2.1.2",
+    "license": "WTFPL",
+    "source": "https://registry.npmjs.org/d3-flextree/-/d3-flextree-2.1.2.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "diff-match-patch",
+    "referenceVersion": "1.0.5",
+    "license": "Apache-2.0",
+    "source": "https://registry.npmjs.org/diff-match-patch/-/diff-match-patch-1.0.5.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "dompurify",
+    "referenceVersion": "3.2.4",
+    "license": "(MPL-2.0 OR Apache-2.0)",
+    "source": "https://registry.npmjs.org/dompurify/-/dompurify-3.2.4.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "echarts",
+    "referenceVersion": "5.5.1",
+    "license": "Apache-2.0",
+    "source": "https://registry.npmjs.org/echarts/-/echarts-5.5.1.tgz",
+    "files": [
+      "package/LICENSE",
+      "package/licenses/LICENSE-d3",
+      "package/NOTICE"
+    ]
+  },
+  {
+    "name": "eve-raphael",
+    "referenceVersion": "0.5.0",
+    "source": "https://registry.npmjs.org/eve-raphael/-/eve-raphael-0.5.0.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "flowchart.js",
+    "referenceVersion": "1.18.0",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/flowchart.js/-/flowchart.js-1.18.0.tgz",
+    "files": [
+      "package/license"
+    ]
+  },
+  {
+    "name": "highlight.js",
+    "referenceVersion": "11.7.0",
+    "license": "BSD-3-Clause",
+    "source": "https://registry.npmjs.org/highlight.js/-/highlight.js-11.7.0.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "js-yaml",
+    "referenceVersion": "4.1.0",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/js-yaml/-/js-yaml-4.1.0.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "katex",
+    "referenceVersion": "0.16.9",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/katex/-/katex-0.16.9.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "lodash-es",
+    "referenceVersion": "4.17.21",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.21.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "markmap-lib",
+    "referenceVersion": "0.16.0",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/markmap-lib/-/markmap-lib-0.16.0.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "markmap-view",
+    "referenceVersion": "0.16.0",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/markmap-view/-/markmap-view-0.16.0.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "mathjax",
+    "referenceVersion": "3.2.2",
+    "license": "Apache-2.0",
+    "source": "https://registry.npmjs.org/mathjax/-/mathjax-3.2.2.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "mermaid",
+    "referenceVersion": "11.6.0",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/mermaid/-/mermaid-11.6.0.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "pako",
+    "referenceVersion": "1.0.11",
+    "license": "(MIT AND Zlib)",
+    "source": "https://registry.npmjs.org/pako/-/pako-1.0.11.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "plantuml-encoder",
+    "referenceVersion": "1.4.0",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/plantuml-encoder/-/plantuml-encoder-1.4.0.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "prismjs",
+    "referenceVersion": "1.29.0",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/prismjs/-/prismjs-1.29.0.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "raphael",
+    "referenceVersion": "2.3.0",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/raphael/-/raphael-2.3.0.tgz",
+    "files": [
+      "package/license.txt"
+    ]
+  },
+  {
+    "name": "smiles-drawer",
+    "referenceVersion": "2.0.1",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/smiles-drawer/-/smiles-drawer-2.0.1.tgz",
+    "files": [
+      "package/LICENSE.md"
+    ]
+  },
+  {
+    "name": "vditor",
+    "referenceVersion": "3.11.2",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/vditor/-/vditor-3.11.2.tgz",
+    "files": [
+      "package/dist/js/highlight.js/LICENSE",
+      "package/dist/js/mathjax/LICENSE",
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "viz.js",
+    "referenceVersion": "2.1.2",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/viz.js/-/viz.js-2.1.2.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  },
+  {
+    "name": "zrender",
+    "referenceVersion": "5.6.0",
+    "license": "BSD-3-Clause",
+    "source": "https://registry.npmjs.org/zrender/-/zrender-5.6.0.tgz",
+    "files": [
+      "package/LICENSE"
+    ]
+  }
+]

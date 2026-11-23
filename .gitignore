@@ -1,0 +1,16 @@
+node_modules/
+.tools/
+dist/
+src-tauri/target/
+src-tauri/gen/
+release/
+.env
+.env.*
+*.log
+*.pem
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+release-screenshot-profile-*/
+*.tmp

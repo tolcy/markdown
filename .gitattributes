@@ -1,0 +1,9 @@
+# Keep text files stable across platforms; Windows scripts keep CRLF.
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.png binary
+*.jpg binary
+*.ico binary
+*.icns binary
+*.exe binary
