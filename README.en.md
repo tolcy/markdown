@@ -4,13 +4,13 @@
 
 A free, open-source Markdown desktop editor for Windows with instant rendering, local workspaces, multiple tabs, per-document encryption, and document export. No account required. Save your writing directly in your own folders.
 
-[简体中文](README.md) · [Download for Windows](https://gitee.com/tolcy/markdown/releases/latest) · [Release notes](RELEASE_NOTES.md) · [MIT license](LICENSE)
+[简体中文](README.md) · [Download (Gitee)](https://gitee.com/tolcy/markdown/releases/latest) · [GitHub](https://github.com/tolcy/markdown/releases/latest) · [Release notes](RELEASE_NOTES.md) · [MIT license](LICENSE)
 
 ![Tolcy in English with the dark theme](docs/screenshots/editor-en.png)
 
 ## Download
 
-1. Open [Releases](https://gitee.com/tolcy/markdown/releases/latest) and download `TolcyMarkdown_0.1.0_x64-setup.exe`.
+1. Open [Gitee Releases](https://gitee.com/tolcy/markdown/releases/latest) or [GitHub Releases](https://github.com/tolcy/markdown/releases/latest) and download `TolcyMarkdown_0.1.0_x64-setup.exe`.
 2. Run the installer and launch Tolcy.
 3. Open a Markdown file or a local folder and start writing.
 

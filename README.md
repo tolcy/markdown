@@ -4,13 +4,13 @@
 
 免费开源的 Windows Markdown 编辑器，支持即时渲染、本地工作区、多标签、按文稿加密和多种格式导出。无需账户，文稿直接保存在自己的文件夹里。
 
-[English](README.en.md) · [下载安装包](https://gitee.com/tolcy/markdown/releases/latest) · [更新说明](RELEASE_NOTES.md) · [MIT 许可证](LICENSE)
+[English](README.en.md) · [下载安装包](https://gitee.com/tolcy/markdown/releases/latest) · [GitHub Releases](https://github.com/tolcy/markdown/releases/latest) · [更新说明](RELEASE_NOTES.md) · [MIT 许可证](LICENSE)
 
 ![Tolcy 中文界面：工作区、多标签和即时渲染编辑](docs/screenshots/editor-zh.png)
 
 ## 下载与安装
 
-1. 在 [Releases](https://gitee.com/tolcy/markdown/releases/latest) 下载 `TolcyMarkdown_0.1.0_x64-setup.exe`。
+1. 在 [Gitee Releases](https://gitee.com/tolcy/markdown/releases/latest) 或 [GitHub Releases](https://github.com/tolcy/markdown/releases/latest) 下载 `TolcyMarkdown_0.1.0_x64-setup.exe`。
 2. 运行安装程序，启动 Tolcy。
 3. 打开 Markdown 文件或本地文件夹，开始写作。
 
